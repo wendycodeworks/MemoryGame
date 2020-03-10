@@ -1,5 +1,7 @@
 require_relative "box"
+require "colorize"
 
+puts "I am red".colorize(:red)
 dimension = 3
 number_of_card = dimension**2
 number_on_card = []
@@ -33,23 +35,29 @@ def firstflip(dimension, card)
         printxx()
 
         if card == count
-            print "-XXXXX"
+            print "-XXXXX".colorize(:red)
         else
-            print "-XX#{count}XX"
+             print "-XX".colorize(:red)
+             print count
+             print "XX".colorize(:red)
         end
         count += 1
 
         if card == count
-            print "-XXXXX"
+            print "-XXXXX".colorize(:red)
         else
-            print "-XX#{count}XX"
+             print "-XX".colorize(:red)
+             print count
+             print "XX".colorize(:red)
         end
         count += 1
         
         if card == count
-            print "-XXXXX"
+            print "-XXXXX".colorize(:red)
         else
-            print "-XX#{count}XX"
+             print "-XX".colorize(:red)
+             print count
+             print "XX".colorize(:red)
         end
         count += 1
         puts "---"
@@ -73,23 +81,29 @@ def secondflip(dimension, card, card2)
 
     
        if card == count || count == card2
-           print "-XXXXX"
+           print "-XXXXX".colorize(:red)
        else
-           print "-XX#{count}XX"
+            print "-XX".colorize(:red)
+            print count
+            print "XX".colorize(:red)
        end
        count += 1
 
        if card == count || count == card2
-           print "-XXXXX"
+            print "-XXXXX".colorize(:red)
        else
-           print "-XX#{count}XX"
+            print "-XX".colorize(:red)
+            print count
+            print "XX".colorize(:red)
        end
        count += 1
        
        if card == count || count == card2
-           print "-XXXXX"
+           print "-XXXXX".colorize(:red)
        else
-           print "-XX#{count}XX"
+           print "-XX".colorize(:red)
+           print count
+           print "XX".colorize(:red)
        end
        count += 1
        puts "---"
@@ -105,11 +119,11 @@ end
 def match_condition(a,b)
     if a == b
         p "It's a match!!"
-        secondflip(3,9,8)
+        # secondflip(3,9,8)
         return true
     else
         p "Tough Luck try again :("
-        game_panel(3)
+        # game_panel(3)
         return false
     end
 end
@@ -119,15 +133,15 @@ a = backside[firstflip(3,1)]
 b = backside[secondflip(3,1,2)]
 p a
 p b
-while !match_condition(a,b)
-    b = backside[secondflip(3,1,2)]
-end
+# while !match_condition(a,b)
+#     b = backside[secondflip(3,1,2)]
+# end
 
 
 p backside
 match_condition(a,b)
-backside.delete(firstflip(3,1))
-backside.delete(secondflip(3,1,2))
+# backside.delete(firstflip(3,1))
+# backside.delete(secondflip(3,1,2))
 p backside
 
 

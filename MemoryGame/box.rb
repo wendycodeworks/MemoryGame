@@ -1,7 +1,7 @@
 def printxx()
-    print "-XXXXX"
-    print "-XXXXX"
-    print "-XXXXX"
+    print "-XXXXX".colorize(:red)
+    print "-XXXXX".colorize(:red)
+    print "-XXXXX".colorize(:red)
     puts "---"
 end
 
