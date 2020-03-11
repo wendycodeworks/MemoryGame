@@ -1,5 +1,6 @@
 require_relative "box_display"
 require "colorize"
+require_relative "userinput_test_case"
 
 # Initialize variables
 dimension = 3
@@ -22,19 +23,6 @@ end
 
 backside = rand_alph()
 key = rand_alph()
-
-def askforcard1()
-    puts "Choose the first card (1-9)"
-    card1 = gets.chomp()
-    return card1
-end
-
-def askforcard2()
-    puts "Choose a second card between (1-9) to match"
-    card2 = gets.chomp()
-    return card2
-end
-
 
 def init_state(dimension, backside,matches,key)
     count = 1
@@ -278,33 +266,6 @@ def win_display()
     puts "--------------"
 end
 
-def test_input1(matches, card1, card2)
-    while matches.include?(card1) || card1 == card2 || !(/^[1-9]$/).match?(card1)
-        if !(/^[1-9]$/).match?(card1)
-            puts "Please input an integer in the specified range"
-        else
-            puts "That card is already open"
-        end
-        card1 = askforcard1()
-
-    end
-
-    return card1.to_i
-
-end
-
-def test_input2(matches,card1,card2)
-    while matches.include?(card2) || card1 == card2 || !(/^[1-9]$/).match?(card2)
-        if !(/^[1-9]$/).match?(card2)
-            puts "Please input an integer in the specified range"
-        else 
-            puts "That card is already open"
-        end 
-        card2 = askforcard2()
-    end
-    return card2.to_i
-end
-
 while !backside.empty?
     card1 = -1
     card2 = -1
@@ -319,16 +280,16 @@ while !backside.empty?
 
 
     card1 = test_input1(matches,card1,card2)
-    p card1
+    p "Card1: #{card1}"
 
     p "currKey: #{backside}"
     p "Ans #{key}"
     p "corect match #{matches}" 
     firstflip(3,card1,backside,matches,key)
     card2 = askforcard2()
-    # card2 = card2.to_i
     card2 = test_input2(matches,card1,card2)
-
+    p "Card2: #{card2}"
+ 
     p "Ans #{key}"
     secondflip(3, card1, card2,backside,matches,key)
     p "corect match #{matches}"
