@@ -32,7 +32,7 @@ end
 def askforcard2()
     puts "Choose a second card between (1-9) to match"
     card2 = gets.chomp()
-    return card2.to_i
+    return card2
 end
 
 
@@ -288,20 +288,21 @@ def test_input1(matches, card1, card2)
         card1 = askforcard1()
 
     end
-    return card1
+
+    return card1.to_i
 
 end
 
 def test_input2(matches,card1,card2)
-    while matches.include?(card2) || card1 == card2 || !(/^[1-9]$/).match?(card1)
-        if !(/^[1-9]$/).match?(card1)
+    while matches.include?(card2) || card1 == card2 || !(/^[1-9]$/).match?(card2)
+        if !(/^[1-9]$/).match?(card2)
             puts "Please input an integer in the specified range"
         else 
             puts "That card is already open"
         end 
         card2 = askforcard2()
     end
-    return card2
+    return card2.to_i
 end
 
 while !backside.empty?
@@ -311,7 +312,7 @@ while !backside.empty?
     init_state(3,backside,matches,key)
     puts "Matches: #{matches}"
     card1 = askforcard1()
-    card1.to_i
+    # card1 = card1.to_i
     puts "Card1 #{card1}"
     puts matches.include?(card1)
 
@@ -325,7 +326,7 @@ while !backside.empty?
     p "corect match #{matches}" 
     firstflip(3,card1,backside,matches,key)
     card2 = askforcard2()
-    card2.to_i
+    # card2 = card2.to_i
     card2 = test_input2(matches,card1,card2)
 
     p "Ans #{key}"
