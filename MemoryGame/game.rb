@@ -14,12 +14,12 @@ end
 
 def rand_alph()
     # alph_hash = {1=>"A",2=>"A",3=>"B",4=>"B",5=>"C",6=>"C",7=>"D",8=>"D"}
-    alph_hash = {1=>"A",2=>"A",3=>"B",4=>"B"}
-
+    alph_hash = {1=>"A",2=>"A",3=>"B",4=>"B",5=>"C",6=>"C"}
     return alph_hash
 end
 
 backside = rand_alph()
+key = rand_alph()
 
 def askforcard1()
     puts "Choose the first card (1-9)"
@@ -33,7 +33,8 @@ def askforcard2()
     return card2
 end
 
-def init_state(dimension, backside)
+
+def init_state(dimension, backside,matches,key)
     count = 1
     prettybox(3)
     #Creates dimension of rows of cards
@@ -41,30 +42,44 @@ def init_state(dimension, backside)
 
         printxx()
 
-        if !backside.key?(count)
-            print "-XXXXX".colorize(:red)
+        if backside.key?(count)
+            print "-XX".colorize(:red)
+            print count
+            print "XX".colorize(:red)
+        elsif matches.include?(count)
+            print "-XX".colorize(:red)
+            print key[count]
+            print "XX".colorize(:red)
         else
-             print "-XX".colorize(:red)
-             print count
-             print "XX".colorize(:red)
+            print "-XXXXX".colorize(:red)
         end
         count += 1
 
-        if  !backside.key?(count)
-            print "-XXXXX".colorize(:red)
+        if  backside.key?(count)
+            print "-XX".colorize(:red)
+            print count
+            print "XX".colorize(:red)
+        elsif matches.include?(count)
+            print "-XX".colorize(:red)
+            print key[count]
+            print "XX".colorize(:red)
         else
-             print "-XX".colorize(:red)
-             print count
-             print "XX".colorize(:red)
+            print "-XXXXX".colorize(:red)
+
         end
         count += 1
         
-        if !backside.key?(count)
-            print "-XXXXX".colorize(:red)
+        if backside.key?(count)
+            print "-XX".colorize(:red)
+            print count
+            print "XX".colorize(:red)
+        elsif matches.include?(count)
+            print "-XX".colorize(:red)
+            print key[count]
+            print "XX".colorize(:red)
         else
-             print "-XX".colorize(:red)
-             print count
-             print "XX".colorize(:red)
+            print "-XXXXX".colorize(:red)
+     
         end
         count += 1
         puts "---"
@@ -74,17 +89,22 @@ def init_state(dimension, backside)
     end
 end
 
-def firstflip(dimension, card, backside)
+def firstflip(dimension, card, backside, matches,key)
     count = 1
     prettybox(3)
     #Creates dimension of rows of cards
+
     for x in 0..dimension-1
 
         printxx()
 
         if card == count
             print "-XX".colorize(:red)
-            print backside[card]
+            print backside[count]
+            print "XX".colorize(:red)
+        elsif matches.include?(count)
+            print "-XX".colorize(:red)
+            print key[count]
             print "XX".colorize(:red)
         elsif backside.key?(count)
             print "-XX".colorize(:red)
@@ -97,7 +117,11 @@ def firstflip(dimension, card, backside)
 
         if card == count
             print "-XX".colorize(:red)
-            print backside[card]
+            print backside[count]
+            print "XX".colorize(:red)
+        elsif matches.include?(count)
+            print "-XX".colorize(:red)
+            print key[count]
             print "XX".colorize(:red)
         elsif backside.key?(count)
             print "-XX".colorize(:red)
@@ -105,12 +129,19 @@ def firstflip(dimension, card, backside)
             print "XX".colorize(:red)
         else
             print "-XXXXX".colorize(:red)
+            print key[count]
         end
+
+
         count += 1
         
         if card == count
             print "-XX".colorize(:red)
-            print backside[card]
+            print backside[count]
+            print "XX".colorize(:red)
+        elsif matches.include?(count)
+            print "-XX".colorize(:red)
+            print key[count]
             print "XX".colorize(:red)
         elsif backside.key?(count)
             print "-XX".colorize(:red)
@@ -119,6 +150,7 @@ def firstflip(dimension, card, backside)
         else
             print "-XXXXX".colorize(:red)
         end
+
         count += 1
         puts "---"
         
@@ -127,12 +159,11 @@ def firstflip(dimension, card, backside)
     end
 end
 
-def secondflip(dimension, card, card2,backside)
+def secondflip(dimension, card, card2,backside,matches ,key)
     # Space between each row of cards
    #Make an array of number of cards (1,2,3...9)
    prettybox(3)
    count = 1
-
    #Creates dimension of rows of cards
    for x in 0..dimension-1
 
@@ -146,6 +177,10 @@ def secondflip(dimension, card, card2,backside)
             print "-XX".colorize(:red)
             print backside[card2]
             print "XX".colorize(:red)
+        elsif matches.include?(count)
+            print "-XX".colorize(:red)
+            print key[count]
+            print "XX".colorize(:red)
         elsif backside.key?(count)
             print "-XX".colorize(:red)
             print count
@@ -153,6 +188,8 @@ def secondflip(dimension, card, card2,backside)
         else
             print "-XXXXX".colorize(:red)
         end
+        # print count
+
         count += 1
 
         if card == count
@@ -163,6 +200,10 @@ def secondflip(dimension, card, card2,backside)
             print "-XX".colorize(:red)
             print backside[card2]
             print "XX".colorize(:red)
+        elsif matches.include?(count)
+            print "-XX".colorize(:red)
+            print key[count]
+            print "XX".colorize(:red)
         elsif backside.key?(count)
             print "-XX".colorize(:red)
             print count
@@ -170,6 +211,9 @@ def secondflip(dimension, card, card2,backside)
         else
             print "-XXXXX".colorize(:red)
         end
+        # print count
+
+
         count += 1
         
         if card == count
@@ -180,6 +224,10 @@ def secondflip(dimension, card, card2,backside)
             print "-XX".colorize(:red)
             print backside[card2]
             print "XX".colorize(:red)
+        elsif matches.include?(count)
+            print "-XX".colorize(:red)
+            print key[count]
+            print "XX".colorize(:red)
         elsif backside.key?(count)
             print "-XX".colorize(:red)
             print count
@@ -187,13 +235,15 @@ def secondflip(dimension, card, card2,backside)
         else
             print "-XXXXX".colorize(:red)
         end
+        # print count
+
         count += 1
        puts "---"
        
        printxx()
        prettybox(3)
+    end
 
-   end
 end
 
 
@@ -214,7 +264,10 @@ def correct_match(a,b,backside,correct_match)
         correct_match.push(a)
         correct_match.push(b)
         return correct_match
+    else
+        return correct_match
     end
+
 end
 
 def win_display()
@@ -225,18 +278,35 @@ end
 
 while !backside.empty?
     puts "Attempt:  #{attempt.length + 1}"
-    init_state(3,backside)
+    init_state(3,backside,matches,key)
+    puts "Matches: #{matches}"
     card1 = askforcard1()
-    p "Key: #{backside}"
-    firstflip(3,card1,backside)
+    puts "Card1 #{card1}"
+    puts matches.include?(card1)
+    while matches.include?(card1) 
+        puts "That card is already open"
+        card1 = askforcard1()
+    end
+    p "currKey: #{backside}"
+    p "Ans #{key}"
+    p "corect match #{matches}" 
+    firstflip(3,card1,backside,matches,key)
     card2 = askforcard2()
-    secondflip(3, card1, card2,backside)
+    while matches.include?(card2) || card1 == card2 
+        puts "That card is already open"
+        card2 = askforcard2()
+    end
+    p "Ans #{key}"
+    secondflip(3, card1, card2,backside,matches,key)
+    p "corect match #{matches}"
     backside = match_condition(card1,card2,backside)
-    correct = correct_match(card1,card2,backside,matches)
-    p "corect match #{correct}" 
+    matches = correct_match(card1,card2,backside,matches)
+    p "corect match #{matches}" 
     attempt.push([card1, card2])
 
     p "Attempts: #{attempt}"
+    p "Attempts: #{attempt.flatten}"
+
     p "Key: #{backside}"
     if backside.empty? 
         win_display()
