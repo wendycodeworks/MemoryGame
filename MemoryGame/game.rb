@@ -23,22 +23,16 @@ end
 backside = rand_alph()
 key = rand_alph()
 
-def askforcard1(lowlimit,uplimit)
+def askforcard1()
     puts "Choose the first card (1-9)"
-    card1 = gets.to_i
-    if card1 >= uplimit || card1 <= lowlimit
-        card1 = -1
-    end
+    card1 = gets.chomp()
     return card1
 end
 
-def askforcard2(lowlimit,uplimit)
-    puts "Choose the second card to match(1-9)"
-    card2 = gets.to_i
-    if card2 >= uplimit || card2 <= lowlimit
-        card2 = -1
-    end
-    return card2
+def askforcard2()
+    puts "Choose a second card between (1-9) to match"
+    card2 = gets.chomp()
+    return card2.to_i
 end
 
 
@@ -285,13 +279,13 @@ def win_display()
 end
 
 def test_input1(matches, card1, card2)
-    while card1 == -1 || matches.include?(card1) || card1 == card2 
-        if matches.include?(card1) || card1 == card2 
+    while matches.include?(card1) || card1 == card2 || !(/^[1-9]$/).match?(card1)
+        if !(/^[1-9]$/).match?(card1)
+            puts "Please input an integer in the specified range"
+        else
             puts "That card is already open"
-        elsif card1 == -1
-            puts "Please put a integer in specified range"
         end
-        card1 = askforcard1(0,9)
+        card1 = askforcard1()
 
     end
     return card1
@@ -299,24 +293,25 @@ def test_input1(matches, card1, card2)
 end
 
 def test_input2(matches,card1,card2)
-    while matches.include?(card2) || card1 == card2 || card2 == -1
-        if matches.include?(card2) || card1 == card2 
+    while matches.include?(card2) || card1 == card2 || !(/^[1-9]$/).match?(card1)
+        if !(/^[1-9]$/).match?(card1)
+            puts "Please input an integer in the specified range"
+        else 
             puts "That card is already open"
-        elsif card2 == -1
-            puts "Please put a number in specified range"
-        end
-        card2 = askforcard2(0,9)
+        end 
+        card2 = askforcard2()
     end
     return card2
 end
 
 while !backside.empty?
-    card1 = 0
-    card2 = 0
+    card1 = -1
+    card2 = -1
     puts "Attempt:  #{attempt.length + 1}"
     init_state(3,backside,matches,key)
     puts "Matches: #{matches}"
-    card1 = askforcard1(0,9)
+    card1 = askforcard1()
+    card1.to_i
     puts "Card1 #{card1}"
     puts matches.include?(card1)
 
@@ -329,7 +324,7 @@ while !backside.empty?
     p "Ans #{key}"
     p "corect match #{matches}" 
     firstflip(3,card1,backside,matches,key)
-    card2 = askforcard2(0,9)
+    card2 = askforcard2()
     card2.to_i
     card2 = test_input2(matches,card1,card2)
 
