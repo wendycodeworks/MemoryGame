@@ -6,6 +6,7 @@ dimension = 3
 number_of_card = dimension**2
 number_on_card = []
 attempt = []
+matches = []
 
 for i in 1..number_of_card
     number_on_card.push(i)
@@ -73,7 +74,7 @@ def init_state(dimension, backside)
     end
 end
 
-def firstflip(dimension, card, backside, prev_state)
+def firstflip(dimension, card, backside)
     count = 1
     prettybox(3)
     #Creates dimension of rows of cards
@@ -126,7 +127,7 @@ def firstflip(dimension, card, backside, prev_state)
     end
 end
 
-def secondflip(dimension, card, card2)
+def secondflip(dimension, card, card2,backside)
     # Space between each row of cards
    #Make an array of number of cards (1,2,3...9)
    prettybox(3)
@@ -208,6 +209,14 @@ def match_condition(a,b,backside)
     end
 end
 
+def correct_match(a,b,backside,correct_match)
+    if backside[a] == backside[b]
+        correct_match.push(a)
+        correct_match.push(b)
+        return correct_match
+    end
+end
+
 def win_display()
     puts "--------------"
     puts "You Win!"
@@ -218,16 +227,17 @@ while !backside.empty?
     puts "Attempt:  #{attempt.length + 1}"
     init_state(3,backside)
     card1 = askforcard1()
-    p backside
+    p "Key: #{backside}"
     firstflip(3,card1,backside)
     card2 = askforcard2()
     secondflip(3, card1, card2,backside)
-
     backside = match_condition(card1,card2,backside)
+    correct = correct_match(card1,card2,backside,matches)
+    p "corect match #{correct}" 
     attempt.push([card1, card2])
 
-    p attempt
-    p backside
+    p "Attempts: #{attempt}"
+    p "Key: #{backside}"
     if backside.empty? 
         win_display()
     else
@@ -263,5 +273,3 @@ test_loop = 0
 #     test_loop += 1
 #     puts test_loop
 # end
-
-
