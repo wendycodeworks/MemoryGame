@@ -7,6 +7,8 @@ number_of_card = dimension**2
 number_on_card = []
 attempt = []
 matches = []
+card2 = 0
+question_index = [0,1]
 
 for i in 1..number_of_card
     number_on_card.push(i)
@@ -21,15 +23,21 @@ end
 backside = rand_alph()
 key = rand_alph()
 
-def askforcard1()
+def askforcard1(lowlimit,uplimit)
     puts "Choose the first card (1-9)"
     card1 = gets.to_i
+    if card1 >= uplimit || card1 <= lowlimit
+        card1 = -1
+    end
     return card1
 end
 
-def askforcard2()
+def askforcard2(lowlimit,uplimit)
     puts "Choose the second card to match(1-9)"
     card2 = gets.to_i
+    if card2 >= uplimit || card2 <= lowlimit
+        card2 = -1
+    end
     return card2
 end
 
@@ -276,26 +284,55 @@ def win_display()
     puts "--------------"
 end
 
+def test_input1(matches, card1, card2)
+    while card1 == -1 || matches.include?(card1) || card1 == card2 
+        if matches.include?(card1) || card1 == card2 
+            puts "That card is already open"
+        elsif card1 == -1
+            puts "Please put a integer in specified range"
+        end
+        card1 = askforcard1(0,9)
+
+    end
+    return card1
+
+end
+
+def test_input2(matches,card1,card2)
+    while matches.include?(card2) || card1 == card2 || card2 == -1
+        if matches.include?(card2) || card1 == card2 
+            puts "That card is already open"
+        elsif card2 == -1
+            puts "Please put a number in specified range"
+        end
+        card2 = askforcard2(0,9)
+    end
+    return card2
+end
+
 while !backside.empty?
+    card1 = 0
+    card2 = 0
     puts "Attempt:  #{attempt.length + 1}"
     init_state(3,backside,matches,key)
     puts "Matches: #{matches}"
-    card1 = askforcard1()
+    card1 = askforcard1(0,9)
     puts "Card1 #{card1}"
     puts matches.include?(card1)
-    while matches.include?(card1) 
-        puts "That card is already open"
-        card1 = askforcard1()
-    end
+
+
+
+    card1 = test_input1(matches,card1,card2)
+    p card1
+
     p "currKey: #{backside}"
     p "Ans #{key}"
     p "corect match #{matches}" 
     firstflip(3,card1,backside,matches,key)
-    card2 = askforcard2()
-    while matches.include?(card2) || card1 == card2 
-        puts "That card is already open"
-        card2 = askforcard2()
-    end
+    card2 = askforcard2(0,9)
+    card2.to_i
+    card2 = test_input2(matches,card1,card2)
+
     p "Ans #{key}"
     secondflip(3, card1, card2,backside,matches,key)
     p "corect match #{matches}"
