@@ -1,5 +1,3 @@
-Cntrl-Shift-V
-
 # Memory Game
 Link to Repository: https://github.com/wcheng8/MemoryGame
 
@@ -26,7 +24,6 @@ The user will interact with the game on the terminal. The user will select a car
 
 ### Control Flow Diagram
 
-![Image of Flowchart](https://github.com/wcheng8/MemoryGame/blob/master/Documents/flowchart.jpg)
 ![Image of Flowchart](flowchart.jpg)
 
 ### Implementation Plan
@@ -179,15 +176,21 @@ Feature 9: Randomize the position of the cards, so every game will be different
 
 Using random_hash.rb. Creates a random hash by creating a random array of matching pairs and calls the character from a character set array.
 
+    def rand_alph()
+        rand_hash = {}
+        rand_arr = []
+        charset = Array("A".."Z")
+        for i in 1..8
+            temp = rand(1..8)
+            while rand_arr.include?(temp)
+                temp = rand(1..8)
+            end
+            rand_arr.push(temp)
+        end
+        ...
+        return rand_hash
+    end
 
 ### Project Management platform on github
 Link: https://github.com/wcheng8/MemoryGame/projects
-
-R10	Design help documentation which includes a set of instructions which accurately describe how to use and install the application.
-
-You must include:
-- steps to install the application
-- any dependencies required by the application to operate
-- any system/hardware requirements
-
 
