@@ -18,7 +18,7 @@ question_index = [0,1]
 number_on_card = numbersoncard(number_of_card, number_on_card)
 backside = rand_alph()
 key = rand_alph()
-
+system "clear"
 print TTY::Box.frame "Welcome to the Memory Game!"
 while !backside.empty?
     card1 = -1
@@ -34,6 +34,7 @@ while !backside.empty?
     matches = correct_match(card1,card2,backside,matches)
     attempt.push([card1, card2])
     if backside.empty? 
+        system "clear"
         win_display()
     else
         puts "Keep Going!"
