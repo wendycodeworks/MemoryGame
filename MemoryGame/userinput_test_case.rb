@@ -18,11 +18,8 @@ def test_input1(matches, card1, card2)
             puts "That card is already open"
         end
         card1 = askforcard1()
-
     end
-
     return card1.to_i
-
 end
 
 def test_input2(matches,card1,card2)
