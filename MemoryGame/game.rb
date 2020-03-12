@@ -8,7 +8,6 @@ require_relative "win_message.rb"
 require "colorize"
 require "tty-box"
 require "tty-prompt"
-require "tty-spinner"
 require 'progress_bar'
 
 # Initialize variables

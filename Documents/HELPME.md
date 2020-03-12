@@ -26,3 +26,12 @@ All files in /TerminalApp/MemoryGame
 - random_hash.rb
 - userinput_test_case.rb
 - win_message.rb
+
+## (NOTE: Install gems before running the code to ensure you have the gems)
+Gems installed include
+- colorize
+- tty-box
+- tty-prompt
+- progress_bar
+
+Install gems in prompt using gem install 'colorize', gem install tty-box...
