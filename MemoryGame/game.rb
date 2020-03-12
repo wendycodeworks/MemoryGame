@@ -1,10 +1,11 @@
 require_relative "box_display"
-require "colorize"
 require_relative "userinput_test_case"
 require_relative "display_card_status"
 require_relative "random_hash"
 require_relative "match_case.rb"
 require_relative "cardnum.rb"
+require "colorize"
+require "tty-box"
 
 # Initialize variables
 dimension = 3
@@ -18,6 +19,7 @@ number_on_card = numbersoncard(number_of_card, number_on_card)
 backside = rand_alph()
 key = rand_alph()
 
+print TTY::Box.frame "Welcome to the Memory Game!"
 while !backside.empty?
     card1 = -1
     card2 = -1
