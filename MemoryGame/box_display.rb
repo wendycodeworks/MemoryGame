@@ -12,12 +12,6 @@ def prettybox(dimension)
     puts " "
 end
 
-def win_display()
-    puts "--------------"
-    puts "You Win!"
-    puts "--------------"
-end
-
 def printcount(count)
     print "-XX".colorize(:red)
     print count

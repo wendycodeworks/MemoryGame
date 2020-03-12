@@ -4,40 +4,62 @@ require_relative "display_card_status"
 require_relative "random_hash"
 require_relative "match_case.rb"
 require_relative "cardnum.rb"
+require_relative "win_message.rb"
 require "colorize"
 require "tty-box"
 
 # Initialize variables
-dimension = 3
-number_of_card = dimension**2
+number_of_card = 3**2
 number_on_card = []
-attempt = []
-matches = []
-card2 = 0
-question_index = [0,1]
 number_on_card = numbersoncard(number_of_card, number_on_card)
-backside = rand_alph()
-key = rand_alph()
+playagain = true
 system "clear"
 print TTY::Box.frame "Welcome to the Memory Game!"
-while !backside.empty?
-    card1 = -1
-    card2 = -1
-    init_state(3,backside,matches,key)
-    card1 = askforcard1()
-    card1 = test_input1(matches,card1,card2)
-    firstflip(3,card1,backside,matches,key)
-    card2 = askforcard2()
-    card2 = test_input2(matches,card1,card2)
-    secondflip(3, card1, card2,backside,matches,key)
-    backside = match_condition(card1,card2,backside)
-    matches = correct_match(card1,card2,backside,matches)
-    attempt.push([card1, card2])
-    if backside.empty? 
-        system "clear"
-        win_display()
-    else
-        puts "Keep Going!"
+while playagain
+    # system "clear"
+    matches = []
+    attempt = []
+    backside = rand_alph()
+    key = backside.clone()
+    while !backside.empty?
+        card1 = -1
+        card2 = -1
+        # p "Key: #{key}"
+        # p "Backside: #{backside}"
+        # p "Card1: #{card1}"
+        # p "Card2: #{card2}"
+        # p "Matches: #{matches}"
+        # p "Attempts: #{attempt}"
+
+        init_state(3,backside,matches,key)
+
+        card1 = askforcard1()
+        card1 = test_input1(matches,card1,card2)
+        firstflip(3,card1,backside,matches,key)
+        # p "Key: #{key}"
+        # p "Backside: #{backside}"
+        # p "Card1: #{card1}"
+        # p "Card2: #{card2}"
+        # p "Matches: #{matches}"
+        # p "Attempts: #{attempt}"
+        card2 = askforcard2()
+        card2 = test_input2(matches,card1,card2)
+        secondflip(3, card1, card2,backside,matches,key)
+        # p "Key: #{key}"
+        # p "Backside: #{backside}"
+        # p "Card1: #{card1}"
+        # p "Card2: #{card2}"
+        # p "Matches: #{matches}"
+        # p "Attempts: #{attempt}"
+        backside = match_condition(card1,card2,backside)
+        matches = correct_match(card1,card2,backside,matches)
+        attempt.push([card1, card2])
+        if backside.empty?
+            system "clear"
+            playagain = win_display(playagain)
+        else
+            puts "Keep Going!"
+        end
     end
 end
 
@@ -61,7 +83,7 @@ end
 
 #     p attempt
 #     p backside
-#     if backside.empty? 
+#     if backside.empty?
 #         win_display()
 #     else
 #         puts "Keep Going!"
