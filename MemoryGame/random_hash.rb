@@ -19,7 +19,9 @@ def rand_alph()
     for i in 1..rand_arr.length
         rand_hash[i] = charset[rand_arr[i-1]]
     end
-    # rand_hash = {1=>"A",2=>"A"}
+    rand_hash = {1=>"A",2=>"A"}
+    rand_hash = {1=>"A",2=>"A",3=>"C",4=>"C"}
+
     # rand_hash = {1=>"A",2=>"D",3=>"B",4=>"C",5=>"B",6=>"C",7=>"D",8=>"A"}
     return rand_hash
 end

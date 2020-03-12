@@ -1,14 +1,14 @@
+require "tty-box"
+require "tty-prompt"
+
 def win_display(playagain)
-    puts "--------------"
-    puts "You Win!"
-    puts "--------------"
-    puts "Would you like to play another matching game? (y/n)"
-    ans = gets.chomp
-    while !(/[yn]/).match?(ans)
-        puts "Incorrect input, please input either (y/n)"
-        ans = gets.chomp
+    prompt = TTY::Prompt.new
+    box = TTY::Box.frame(width: 30, height: 10, align: :center, padding: 3) do
+        "Congragulations! You Win!"
     end
-    if ans == "y"
+    print box
+    play = prompt.select("Do you want to play again?", %w(Yes No))
+    if play == "Yes"
         playagain = true
     else
         playagain = false
