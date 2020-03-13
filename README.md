@@ -213,3 +213,6 @@ Test that when the user wins if the application prompts the user to play again a
 ### Project Management platform on github
 Link: https://github.com/wcheng8/MemoryGame/projects
 
+### Help me
+This can be accessed by typing ruby game.rb -h in the terminal or through this [link](HELPME.md)     
+
