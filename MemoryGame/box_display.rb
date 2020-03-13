@@ -1,3 +1,5 @@
+#Displays card formmating on the terminal. Makes the cards have colors and shows index of the card. 
+
 def printxx()
     for i in 0..2
         printline()

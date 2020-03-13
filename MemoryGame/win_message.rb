@@ -1,5 +1,4 @@
-require "tty-box"
-require "tty-prompt"
+#Shows win message and prompts you to play again
 
 def win_display(playagain)
     prompt = TTY::Prompt.new

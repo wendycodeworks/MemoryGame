@@ -1,3 +1,5 @@
+#Asks for card1 and card2 and tests if cards is already open or is an integer between the specified range
+
 def askforcard1()
     puts "Choose the first card (1-9)"
     card1 = gets.chomp()
