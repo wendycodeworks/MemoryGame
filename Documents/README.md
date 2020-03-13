@@ -2,8 +2,6 @@
 Link to Repository: https://github.com/wcheng8/MemoryGame
 
 ## Sources
-R3	Provide full attribution to referenced sources (where applicable).	 
-
 ##Software Development Plan
 
 ### Scope & Purpose
@@ -39,19 +37,19 @@ Using the box_display.rb and cardnum.rb. These two codes display the set of card
 
 Feature 2: Allows user to select a card
 
-Using userinput_test_case.rb. The code asks the user for the integer value on the cardback:
+Using userinput_test_case.rb. The code asks the user for the integer value on the cardback, it needs to but inputed a number_of_cards, which will be the maximum number:
 
-    def askforcard1()
-        puts "Choose the first card (1-9)"
+    def askforcard1(number_of_cards)
+        puts "Choose the first card (1-#{number_of_cards})"
         card1 = gets.chomp()
         return card1
     end
 
 The user input is then tested using the same file, to see if it is a valid integer in the 3x3 game.
 
-    def test_input1(matches, card1, card2)
-        while matches.include?(card1.to_i) || !(/^[1-8]$/).match?(card1)
-            if !(/^[1-8]$/).match?(card1)
+    def test_input1(matches, card1, card2,number_of_cards)
+        while matches.include?(card1.to_i) || !(/^[1-${number_of_cards}]$/).match?(card1)
+            if !(/^[1-#{number_of_cards}]$/).match?(card1)
                 puts "Please input an integer in the specified range"
             else
                 puts "That card is already open"
@@ -164,7 +162,7 @@ Feature 8: Checks if user input is a valid integer within range
 
 Using userinput_test_case.rb. In test_input1(). An addon to Feature 2, uses a regex match case to allow cards to be entered in a certain range as integer values only.
 
-    def test_input1(matches, card1, card2)
+    def test_input1(matches, card1, card2, number_of_cards)
         while matches.include?(card1.to_i) || !(/^[1-8]$/).match?(card1)
             if !(/^[1-8]$/).match?(card1)
                 puts "Please input an integer in the specified range"
@@ -176,20 +174,41 @@ Feature 9: Randomize the position of the cards, so every game will be different
 
 Using random_hash.rb. Creates a random hash by creating a random array of matching pairs and calls the character from a character set array.
 
-    def rand_alph()
-        rand_hash = {}
-        rand_arr = []
-        charset = Array("A".."Z")
-        for i in 1..8
-            temp = rand(1..8)
-            while rand_arr.include?(temp)
-                temp = rand(1..8)
-            end
-            rand_arr.push(temp)
+    def rand_alph(number_of_cards)
+    rand_hash = {}
+    rand_arr = []
+    charset = Array("A".."Z")
+    for i in 1..number_of_cards
+        temp = rand(1..number_of_cards)
+        while rand_arr.include?(temp)
+            temp = rand(1..number_of_cards)
         end
-        ...
-        return rand_hash
+        rand_arr.push(temp)
     end
+
+    for i in 0..rand_arr.length-1
+        if rand_arr[i] > number_of_cards/2
+            p "RandArr#{rand_arr[i]}"
+            rand_arr[i] = (rand_arr[i]%(number_of_cards/2)) + 1
+            p "Adjusted #{rand_arr[i]}"
+        end
+    end
+    p rand_arr
+    for i in 1..rand_arr.length
+        rand_hash[i] = charset[rand_arr[i-1]]
+    end
+
+### Test Cases
+Test1 Case:
+Test if the user can input a card outside the specefied range of cards that are displayed on the deck. Or if the program accepts a string as a card input.
+
+Test2 Case:
+Test if the user can flip a card if the card has already been flipped over, either because it is an existing match or it has been flipped over previously because it was selected before.
+
+Test3 Case:
+Test that when the user wins if the application prompts the user to play again and generates another shuffled game for the user to play.
+
+![Image of TestCases](testcases.jpg)
 
 ### Project Management platform on github
 Link: https://github.com/wcheng8/MemoryGame/projects

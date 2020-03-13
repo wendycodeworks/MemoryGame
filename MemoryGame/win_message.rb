@@ -1,4 +1,6 @@
 #Shows win message and prompts you to play again
+#Source: https://github.com/piotrmurach/tty-table
+#Source: https://github.com/piotrmurach/tty-prompt
 
 def win_display(playagain)
     prompt = TTY::Prompt.new

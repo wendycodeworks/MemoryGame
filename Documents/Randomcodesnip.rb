@@ -6,6 +6,7 @@ p "Matches: #{matches}"
 p "Attempts: #{attempt}"
 
 
+
 test_loop = 0
 init_state(3,backside)
 while !backside.empty?

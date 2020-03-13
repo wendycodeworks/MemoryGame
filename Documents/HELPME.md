@@ -20,7 +20,6 @@
 ## Dependencies
 All files in /TerminalApp/MemoryGame
 - box_display.rb
-- cardnum.rb
 - display_card_status.rb
 - match_case.rb
 - random_hash.rb
