@@ -13,6 +13,7 @@ require 'progress_bar'
 #Source: https://github.com/paul/progress_bar
 #Source: https://github.com/piotrmurach/tty-prompt
 
+def memorygame()
 playagain = true
 prompt = TTY::Prompt.new
 
@@ -108,4 +109,5 @@ while playagain
         system "clear"
     end
 end
-
+back_to_main()
+end
